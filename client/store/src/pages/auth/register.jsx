@@ -1,5 +1,5 @@
 import CommonForm from "@/components/common/form";
-//import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { registerFormControls } from "@/config";
 import { registerUser } from "@/store/auth-slice";
 import { useState } from "react";
@@ -17,31 +17,28 @@ function AuthRegister() {
    const dispatch = useDispatch();
    const navigate = useNavigate();
   // const { toast } = useToast();
+ 
 
   function onSubmit(
    event
   ) {
     event.preventDefault();
-    dispatch(registerUser(formData)).then((data) =>  {
-      console.log(data)
-    }, navigate("/auth/login")
-  );
-  }
-  //   dispatch(registerUser(formData)).then((data) => {
-  //     if (data?.payload?.success) {
-  //       toast({
-  //         title: data?.payload?.message,
-  //       });
-  //       navigate("/auth/login");
-  //     } else {
-  //       toast({
-  //         title: data?.payload?.message,
-  //         variant: "destructive",
-  //       });
-  //     }
-  //   }
+  //   dispatch(registerUser(formData)).then((data) =>  {
+  //     console.log(data)
+  //   }, navigate("/auth/login")
   // );
   // }
+    dispatch(registerUser(formData)).then((data) => {
+      if (data?.payload?.success) {
+         toast.success(data?.payload?.message);
+        navigate("/auth/login");
+      } 
+      else {
+        toast.error(data?.payload?.message || "Registration failed");
+      }
+    }
+  );
+  }
 
   console.log(formData);
 
