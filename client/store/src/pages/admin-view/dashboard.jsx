@@ -2,7 +2,11 @@
 
 function AdminDashboard() {
   return (
-    <div>AdminDashboard</div>
+   
+    <div className="min-h-screen">
+       Admin Dashboard
+ 
+ </div>
   )
 }
 
